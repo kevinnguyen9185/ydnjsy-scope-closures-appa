@@ -1,0 +1,13 @@
+h1, h2 {
+  font-family: Lato;
+}
+.red-code {
+  color: red;
+}
+.title-explain {
+  font-style: italic;
+}
+.result-block {
+  width: 100%;
+  color: blue;
+}

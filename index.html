@@ -1,0 +1,56 @@
+<script type="javascript/text">
+  var btnParam1See = document.getElementById('btnParam1See');
+  btnParam1See.onclick = seeResultParameter1;
+
+  var btnParam1Clear = document.getElementById('btnParam1Clear');
+  btnParam1Clear.onclick = clearResultParameter1;
+
+  function whatsTheDealHere1(id,defaultID = () => id) {
+      id = 5;
+      document.getElementById('parameterScope1').innerHTML = defaultID();
+  }
+
+  function whatsTheDealHere2(id,defaultID = () => id) {
+      var id = 5;
+      document.getElementById('parameterScope2').innerHTML = defaultID();
+  }
+
+  function seeResultParameter1() {
+    whatsTheDealHere1(3);
+    whatsTheDealHere2(3);
+  }
+
+  function clearResultParameter1() {
+     document.getElementById('parameterScope1').innerHTML = '';
+     document.getElementById('parameterScope2').innerHTML = '';
+  }
+
+</script>
+<h1>YDNJS</h1>
+<h2>Chapter Scope Closures</h2>
+<h3>Appendix A</h3>
+<div id="app"></div>
+<hr>
+<h4>Parameter Scope</h4>
+<h4 class="title-explain">We introduce function expression in the default parameter</h4>
+<h4 class="title-explain">You might guess what is the deal?</h4>
+<pre>
+    function whatsTheDealHere(id,defaultID = () => id) {
+      id = 5;
+      console.log( defaultID() );
+    }
+
+    whatsTheDealHere(3);
+    <div id="parameterScope1" class="result-block"></div>
+</pre>
+<pre>
+    function whatsTheDealHere(id,defaultID = () => id) {
+      <b class="red-code">var</b> id = 5;
+      console.log( defaultID() );
+    }
+
+    whatsTheDealHere(3);
+    <div id="parameterScope2" class="result-block"></div>
+</pre>
+<button id="btnParam1See">See result</button>
+<button id="btnParam1Clear">Clear result</button>
