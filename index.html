@@ -20,11 +20,42 @@
   function seeResultParameter1() {
     whatsTheDealHere1(3);
     whatsTheDealHere2(3);
+    whatsTheDealHere3(3);
   }
 
   function clearResultParameter1() {
      document.getElementById('parameterScope1').innerHTML = '';
      document.getElementById('parameterScope2').innerHTML = '';
+     document.getElementById('parameterScope3').innerHTML = '';
+  }
+
+  function whatsTheDealHere3(id,defaultID = () => id) {
+    var result = '';
+    var tmpMess = '';
+    var id;
+
+    tmpMess = `local variable 'id': ${ id }  <--- Huh!? Weird!`;
+    result += tmpMess + '</br>';
+    console.log(tmpMess);
+
+    tmpMess = `parameter 'id' (closure): ${ defaultID() }`;
+    result += tmpMess + '</br>';
+    console.log(tmpMess);
+
+    tmpMess = "reassigning 'id' to 5";
+    result += tmpMess + '</br>';
+    console.log(tmpMess);
+    id = 5;
+
+    tmpMess = `local variable 'id': ${ id }`;
+    result += tmpMess + '</br>';
+    console.log(tmpMess);
+
+    tmpMess = `parameter 'id' (closure): ${ defaultID() }`;
+    result += tmpMess + '</br>';
+    console.log(tmpMess);
+
+    document.getElementById('parameterScope3').innerHTML = result;
   }
 
 </script>
@@ -53,6 +84,23 @@
 
     whatsTheDealHere(3);
     <div id="parameterScope2" class="result-block"></div>
+</pre>
+<h4 class="title-explain">Even crazier?</h4>
+<pre>
+    function whatsTheDealHere(id,defaultID = () => id) {
+      var id;
+
+      <b class="red-code">console.log(`local variable 'id': ${ id }`);</b>
+      console.log(`parameter 'id' (closure): ${ defaultID() }`);
+
+      console.log("reassigning 'id' to 5");
+      id = 5;
+
+      console.log(`local variable 'id': ${ id }`);
+      console.log(`parameter 'id' (closure): ${ defaultID() }`);
+    }
+    whatsTheDealHere(3);
+    <div id="parameterScope3" class="result-block"></div>
 </pre>
 <button id="btnParam1See">See result</button>
 <button id="btnParam1Clear">Clear result</button>
